@@ -29,7 +29,7 @@ public class EmployeeRepositoryTests {
 				.email("yunussezgin8@gmail.com")
 				.build();
 
-		// when - action or the behavior that we are goint test
+		// when - action or the behavior that we are going test
 		Employee savedEmployee = employeeRepository.save(employee);
 
 		// then - verify the output
@@ -58,13 +58,32 @@ public class EmployeeRepositoryTests {
 		employeeRepository.save(employee);
 		employeeRepository.save(employee1);
 		
-		// when - action or the behaviour that we are going test
+		// when - action or the behavior that we are going test
 		List<Employee> employeelist = employeeRepository.findAll();
 		
 		// then - verify the output
 		assertThat(employeelist).isNotNull();
 		assertThat(employeelist.size()).isEqualTo(2);
 	
+	}
+	
+	// JUnit test for get employee by id operation
+	@DisplayName("JUnit test for get employee by id operation")
+	@Test
+	public void givenEmployeeObject_whenFindById_thenReturnEmployeeObject() {
+		// given - precondition or setup
+		Employee employee = Employee.builder()
+				.firstName("Yunus")
+				.lastName("Sezgin")
+				.email("yunussezgin8@gmail.com")
+				.build();
+		employeeRepository.save(employee);
+		
+		// when - action or the behavior that we are going test
+		Employee employeeDB = employeeRepository.findById(employee.getId()).get();
+		
+		// then - verify the output
+		assertThat(employeeDB).isNotNull();
 	}
 	
 	
