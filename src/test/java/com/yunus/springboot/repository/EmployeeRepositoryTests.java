@@ -3,6 +3,7 @@ package com.yunus.springboot.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -126,6 +127,26 @@ public class EmployeeRepositoryTests {
 		// then - verify the output
 		assertThat(updatedEmployee.getEmail()).isEqualTo("yns@gmail.com");
 		assertThat(updatedEmployee.getFirstName()).isEqualTo("Yns");
+	}
+	
+	// JUnit test for delete employee operation
+	@DisplayName("JUnit test for delete employee operation")
+	@Test
+	public void givenEmployeeObject_whenDelete_thenRemoveEmployee() {
+		// given - precondition or setup
+		Employee employee = Employee.builder()
+				.firstName("Yunus")
+				.lastName("Sezgin")
+				.email("yunussezgin8@gmail.com")
+				.build();
+		employeeRepository.save(employee);
+		
+		// when - action or the behavior that we are going test
+		employeeRepository.deleteById(employee.getId());
+		Optional<Employee> employeeOptional = employeeRepository.findById(employee.getId());
+		
+		// then - verify the output
+		assertThat(employeeOptional).isEmpty();
 	}
 	
 }
