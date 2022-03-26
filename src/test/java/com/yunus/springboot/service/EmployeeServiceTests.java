@@ -6,6 +6,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,7 +94,7 @@ public class EmployeeServiceTests {
 	public void givenEmployeesList_whenAllEmployees_thenReturnEmployeesList() {
 		// given - precondition or setup
 		Employee employee1 = Employee.builder()
-					.id(1L)
+					.id(2L)
 					.firstName("Emre")
 					.lastName("Sezgin")
 					.email("emresezgingmail.com")
@@ -108,5 +109,21 @@ public class EmployeeServiceTests {
 		Assertions.assertThat(employeeList).isNotNull();
 		Assertions.assertThat(employeeList.size()).isEqualTo(2);
 	}
+	
+	// JUnit test for getAllEmployees method
+	@DisplayName("JUnit test for getAllEmployees method (negative scenario")
+	@Test
+	public void givenEmptyEmployeesList_whenGetAllEmployees_thenReturnEmptyEmployeesList() {
+		// given - precondition or setup
+		given(employeeRepository.findAll()).willReturn(Collections.emptyList());
+		
+		// when - action or behavior that we are going test
+		List<Employee> employeeList = employeeService.getAllEmployees();
+		
+		// then - verify the output
+		Assertions.assertThat(employeeList).isNotNull();
+		Assertions.assertThat(employeeList.size()).isEqualTo(0);
+	}
+
 
 }
