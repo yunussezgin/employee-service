@@ -1,5 +1,6 @@
 package com.yunus.springboot.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
 	public EmployeeServiceImp(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}
@@ -29,6 +30,11 @@ public class EmployeeServiceImp implements EmployeeService {
 		}
 
 		return employeeRepository.save(employee);
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		return employeeRepository.findAll();
 	}
 
 }

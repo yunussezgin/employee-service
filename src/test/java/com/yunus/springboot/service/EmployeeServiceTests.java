@@ -1,12 +1,12 @@
 package com.yunus.springboot.service;
 
-
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.ArgumentMatchers.any;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -73,8 +73,7 @@ public class EmployeeServiceTests {
 	@Test
 	public void givenExistingEmail_whenSaveEmployee_thenThrowsException() {
 		// given - precondition or setup
-		given(employeeRepository.findByEmail(employee.getEmail()))
-				.willReturn(Optional.of(employee));
+		given(employeeRepository.findByEmail(employee.getEmail())).willReturn(Optional.of(employee));
 		
 		System.out.println(employeeRepository);
 		System.out.println(employeeService);
@@ -88,5 +87,26 @@ public class EmployeeServiceTests {
 		verify(employeeRepository, never()).save(any(Employee.class));
 	}
 
+	// JUnit test for getAllEmployees method
+	@DisplayName("JUnit test for getAllEmployees method")
+	@Test
+	public void givenEmployeesList_whenAllEmployees_thenReturnEmployeesList() {
+		// given - precondition or setup
+		Employee employee1 = Employee.builder()
+					.id(1L)
+					.firstName("Emre")
+					.lastName("Sezgin")
+					.email("emresezgingmail.com")
+					.build();
+		
+		given(employeeRepository.findAll()).willReturn(Arrays.asList(employee, employee1));
+		
+		// when - action or behavior that we are going test
+		List<Employee> employeeList = employeeService.getAllEmployees();
+		
+		// then - verify the output
+		Assertions.assertThat(employeeList).isNotNull();
+		Assertions.assertThat(employeeList.size()).isEqualTo(2);
+	}
 
 }
