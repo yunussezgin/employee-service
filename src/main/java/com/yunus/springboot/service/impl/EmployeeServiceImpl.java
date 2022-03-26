@@ -12,12 +12,12 @@ import com.yunus.springboot.repository.EmployeeRepository;
 import com.yunus.springboot.service.EmployeeService;
 
 @Service
-public class EmployeeServiceImp implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public EmployeeServiceImp(EmployeeRepository employeeRepository) {
+	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}
 
@@ -40,6 +40,11 @@ public class EmployeeServiceImp implements EmployeeService {
 	@Override
 	public Optional<Employee> getEmployeeById(long id) {
 		return employeeRepository.findById(id);
+	}
+
+	@Override
+	public Employee updateEmployee(Employee updateEmployee) {
+		return employeeRepository.save(updateEmployee);
 	}
 
 }

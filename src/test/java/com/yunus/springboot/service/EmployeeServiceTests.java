@@ -22,7 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.yunus.springboot.exception.ResourceNotFoundException;
 import com.yunus.springboot.model.Employee;
 import com.yunus.springboot.repository.EmployeeRepository;
-import com.yunus.springboot.service.impl.EmployeeServiceImp;
+import com.yunus.springboot.service.impl.EmployeeServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTests {
@@ -31,7 +31,7 @@ public class EmployeeServiceTests {
 	private EmployeeRepository employeeRepository;
 	
 	@InjectMocks
-	private EmployeeServiceImp employeeService;
+	private EmployeeServiceImpl employeeService;
 	
 	Employee employee;
 	
@@ -136,6 +136,23 @@ public class EmployeeServiceTests {
 		
 		// then - verify the output
 		assertThat(savedEmployee).isNotNull();
+	}
+	
+	// JUnit test for updateEmployee method
+	@DisplayName("JUnit test for updateEmployee method")
+	@Test
+	public void givenEmployeeObject_whenUpdateEmployee_thenReturnUpdatedEmployee() {
+		// given - precondition or setup
+		given(employeeRepository.save(employee)).willReturn(employee);
+		employee.setEmail("yunus@gmail.com");
+		employee.setFirstName("yunus");
+		
+		// when - action or behavior that we are going test
+		Employee updatedEmployee = employeeService.updateEmployee(employee);
+		
+		// then - verify the output
+		assertThat(updatedEmployee.getEmail()).isEqualTo("yunus@gmail.com");
+		assertThat(updatedEmployee.getFirstName()).isEqualTo("yunus");
 	}
 
 }
