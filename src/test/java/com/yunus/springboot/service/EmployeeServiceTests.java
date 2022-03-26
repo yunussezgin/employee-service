@@ -3,6 +3,7 @@ package com.yunus.springboot.service;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.willDoNothing;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -154,5 +157,20 @@ public class EmployeeServiceTests {
 		assertThat(updatedEmployee.getEmail()).isEqualTo("yunus@gmail.com");
 		assertThat(updatedEmployee.getFirstName()).isEqualTo("yunus");
 	}
-
+	
+	// JUnit test for deleteEmployee method
+	@DisplayName("JUnit test for deleteEmployee method")
+	@Test
+	public void givenEmployeeObject_whenDeleteEmployee_thenReturnNothing() {
+		// given - precondition or setup
+		long employeeId = 1L;
+		
+		willDoNothing().given(employeeRepository).deleteById(employeeId);
+		
+		// when - action or behavior that we are going test
+		employeeService.deleteEmployee(employeeId);
+		
+		// then - verify the output
+		verify(employeeRepository, times(1)).deleteById(employeeId);
+	}
 }
