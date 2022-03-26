@@ -111,7 +111,7 @@ public class EmployeeServiceTests {
 	}
 	
 	// JUnit test for getAllEmployees method
-	@DisplayName("JUnit test for getAllEmployees method (negative scenario")
+	@DisplayName("JUnit test for getAllEmployees method (negative scenario)")
 	@Test
 	public void givenEmptyEmployeesList_whenGetAllEmployees_thenReturnEmptyEmployeesList() {
 		// given - precondition or setup
