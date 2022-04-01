@@ -93,7 +93,7 @@ public class EmployeeServiceTests {
 	// JUnit test for getAllEmployees method
 	@DisplayName("JUnit test for getAllEmployees method")
 	@Test
-	public void givenEmployeesList_whenAllEmployees_thenReturnEmployeesList() {
+	public void givenEmployeesList_whenGetAllEmployees_thenReturnEmployeesList() {
 		// given - precondition or setup
 		Employee employee1 = Employee.builder()
 					.id(2L)

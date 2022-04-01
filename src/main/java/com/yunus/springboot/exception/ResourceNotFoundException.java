@@ -1,5 +1,6 @@
 package com.yunus.springboot.exception;
 
+@SuppressWarnings("serial")
 public class ResourceNotFoundException extends RuntimeException {
 
 	public ResourceNotFoundException(String message) {
